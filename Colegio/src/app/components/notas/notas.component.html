@@ -1,0 +1,108 @@
+<div class="card">
+    <div class="card-body">
+      <h2 class="card-title" style="text-align:center;">Notas</h2>
+      <div style="float:right;margin-bottom: 20px;">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#agregarModal"
+          style="margin-left:10px;">
+          <i class="fs-9 bi-person-add"></i>&nbsp;Agregar Nota
+        </button>
+      </div>
+      <table class="table  table-bordered border-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Profesor</th>
+            <th scope="col">Estudiante</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of notes">
+            <th scope="row">{{data.id}}</th>
+            <td>{{data.nombre}}</td>
+            <td>{{data.idProfesor}}</td>
+            <td>{{data.idEstudiante}}</td>
+            <td>{{data.valor}}</td>
+            <td>
+              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editarModal" (click)="editNote(data.id)">
+                <i class="fs-9 bi-pen-fill"></i>&nbsp;Editar
+              </button>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal"
+                style="margin-left:10px;" (click)="deleteNote(data.id)">
+                <i class="fs-9 bi-trash-fill"></i>&nbsp;Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--Modal para agregar al usuario-->
+<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="agregarModalLabel">Agregar Nota</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5 style="text-align: center; color:#0d6efd;">Datos de la Nota</h5>
+          <form [formGroup]="formularioAgregar" *ngIf="formularioAgregar">
+            <div class="mb-3">
+              <input class="form-control" type="text" placeholder="Nombre materia" formControlName="nombre_materia_add" [(ngModel)]="name_add">
+            </div>
+            <div class="mb-3">
+                <input class="form-control" type="number" placeholder="Número de Identificación de Profesor" formControlName="identificacionProfesor_add" [(ngModel)]="idteacher_add">
+            </div>
+            <div class="mb-3">
+             <input class="form-control" type="number" placeholder="Número de Identificación de Estudiante" formControlName="identificacionEstudiante_add" [(ngModel)]="idstudent_add">
+            </div>
+            <div class="mb-3">
+                <input class="form-control" type="number" placeholder="Valor" formControlName="valor_add" [(ngModel)]="note_add">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="addNote(name, idteacher,idstudent,note)">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Modal para editar al usuario-->
+  <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editarModalLabel">Editar Estudiante</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="formularioEditar" *ngIf="formularioEditar">
+              <div class="mb-3">
+                  <label class="form-label">Número de Identificación</label>
+                  <input [readonly]="true" class="form-control" type="number" formControlName="identificacion" [(ngModel)]="id">
+              </div>
+              <div class="mb-3">
+                <input class="form-control" type="text" placeholder="Nombre materia" formControlName="nombre_materia" [(ngModel)]="name">
+              </div>
+              <div class="mb-3">
+                  <input class="form-control" type="number" placeholder="Número de Identificación de Profesor" formControlName="identificacionProfesor" [(ngModel)]="idteacher">
+              </div>
+              <div class="mb-3">
+               <input class="form-control" type="number" placeholder="Número de Identificación de Estudiante" formControlName="identificacionEstudiante" [(ngModel)]="idstudent">
+              </div>
+              <div class="mb-3">
+                  <input class="form-control" type="number" placeholder="Valor" formControlName="valor" [(ngModel)]="note">
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="updateNote(id, name, idteacher,idstudent,note)">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
