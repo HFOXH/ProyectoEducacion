@@ -22,8 +22,8 @@ export class EstudianteComponent implements OnInit{
       nombre_completo: ['']
     });
     this.formularioAgregar = this.formBuilder.group({
-      identificacion: [''],
-      nombre_completo: ['']
+      identificacion: ['', [Validators.required, Validators.maxLength(10)]],
+      nombre_completo: ['',[Validators.required,Validators.maxLength(50)]]
     });
   }
 
