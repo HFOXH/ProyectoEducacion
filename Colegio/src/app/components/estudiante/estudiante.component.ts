@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConexionService } from 'src/app/services/conexion.service';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-estudiante',
@@ -41,8 +42,28 @@ export class EstudianteComponent implements OnInit{
     }
     console.log(datos);
     this.conexionService.postStudent(datos).subscribe({
-      next: res => { console.log('exito'); window.location.reload();},
-      error: error => { console.log(error);}
+      next: res => { 
+        console.log('exito'); 
+        Swal.fire({
+          title: '¡Exito!',
+          text: "los datos han sido registrados satisfactoriamente",
+          icon: 'success',
+          confirmButtonColor: '#08AF62',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        })
+      },
+      error: error => { 
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo salió mal!',
+          confirmButtonColor: '#dc3545'
+        })
+        console.log(error);
+      }
     });
   }
 
@@ -63,15 +84,55 @@ export class EstudianteComponent implements OnInit{
       nombre: names
     };
     this.conexionService.putStudent(id, datos).subscribe({
-      next: res => { console.log('exito'); window.location.reload();},
-      error: error => { console.log(error);}
+      next: res => { 
+        console.log('exito');
+        Swal.fire({
+          title: '¡Exito!',
+          text: "los datos han sido actualizados satisfactoriamente",
+          icon: 'success',
+          confirmButtonColor: '#08AF62',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        })  
+      },
+      error: error => { 
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo salió mal!',
+          confirmButtonColor: '#dc3545'
+        })
+        console.log(error);
+      }
     });
   }
 
   deleteStudent(id:any){
     this.conexionService.deleteStudent(id).subscribe({
-      next: res => { console.log('exito'); window.location.reload();},
-      error: error => { console.log(error);}
+      next: res => { 
+        console.log('exito')
+        Swal.fire({
+          title: '¡Exito!',
+          text: "El dato ha sido eliminado satisfactoriamente",
+          icon: 'success',
+          confirmButtonColor: '#08AF62',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        })
+      },
+      error: error => { 
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo salió mal!',
+          confirmButtonColor: '#dc3545'
+        })
+        console.log(error);
+      }
     });
   }
 }

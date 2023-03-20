@@ -46,9 +46,12 @@
           <form [formGroup]="formularioAgregar" *ngIf="formularioAgregar">
             <div class="mb-3">
               <input class="form-control" type="number" placeholder="Número de Identificación" formControlName="identificacion" [(ngModel)]="id">
+              <p style="color:red;" *ngIf="formularioAgregar.get('identificacion')?.hasError('required')">Este campo es requerido</p>
+            <p style="color:red;" *ngIf="formularioAgregar.get('identificacion')?.hasError('maxLength')">Lo máximo es 10 caracteres</p>
             </div>
             <div class="mb-3">
               <input class="form-control" type="text" placeholder="Nombre Profesor" formControlName="nombre_completo" [(ngModel)]="names">
+              <p style="color:red;" *ngIf="formularioAgregar.get('nombre_completo')?.hasError('required')">Este campo es requerido</p>
             </div>
           </form>
         </div>

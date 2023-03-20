@@ -51,6 +51,7 @@
           </div>
           <div class="mb-3">
             <input class="form-control" type="text" placeholder="Nombre Estudiante" formControlName="nombre_completo" [(ngModel)]="names">
+            <p style="color:red;" *ngIf="formularioAgregar.get('nombre_completo')?.hasError('required')">Este campo es requerido</p>
           </div>
         </form>
       </div>
