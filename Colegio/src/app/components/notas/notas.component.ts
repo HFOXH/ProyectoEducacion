@@ -23,6 +23,8 @@ export class NotasComponent {
   note_add: any;
   idNota: any;
   namesEstudiante: any;
+  students: any;
+  teachers: any;
 
   constructor(public formBuilder: FormBuilder, private conexionService: ConexionService){
     this.formularioEditar = this.formBuilder.group({
@@ -41,8 +43,23 @@ export class NotasComponent {
   }
 
   ngOnInit(): void {
+    this.obtenerEstudiantes();
+    this.obtenerProfesores();
     this.conexionService.getAllNotes().subscribe({
       next: data => { this.notes = data;},
+      error: error => { console.log(error);}
+    });
+  }
+
+  obtenerProfesores(){
+    this.conexionService.getAllStudents().subscribe({
+      next: data => { this.students = data;},
+      error: error => { console.log(error);}
+    });
+  }
+  obtenerEstudiantes(){
+    this.conexionService.getAllTeachers().subscribe({
+      next: data => { this.teachers = data; },
       error: error => { console.log(error);}
     });
   }

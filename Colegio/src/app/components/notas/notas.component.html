@@ -51,15 +51,19 @@
           <h5 style="text-align: center; color:#0d6efd;">Datos de la Nota</h5>
           <form [formGroup]="formularioAgregar" *ngIf="formularioAgregar">
             <div class="mb-3">
-              <input class="form-control" type="text" placeholder="Nombre materia" formControlName="nombre_materia_add" [(ngModel)]="name_add">
+              <label class="form-label">Nombre de la materia</label>
+              <input class="form-control" type="text" placeholder="" formControlName="nombre_materia_add" [(ngModel)]="name_add">
             </div>
             <div class="mb-3">
+                <label class="form-label">Profesor</label>
                 <input class="form-control" type="number" placeholder="Número de Identificación de Profesor" formControlName="identificacionProfesor_add" [(ngModel)]="idteacher_add">
             </div>
             <div class="mb-3">
+            <label class="form-label">Estudiante</label>
              <input class="form-control" type="number" placeholder="Número de Identificación de Estudiante" formControlName="identificacionEstudiante_add" [(ngModel)]="idstudent_add">
             </div>
             <div class="mb-3">
+                <label class="form-label">Valor</label>
                 <input class="form-control" type="number" placeholder="Valor" formControlName="valor_add" [(ngModel)]="note_add">
             </div>
           </form>
